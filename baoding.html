@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>保定 - 我的现居地</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #666;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-color: #e8e8e8;
+            --shadow: 0 2px 12px rgba(0,0,0,0.06);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
+            --radius: 16px;
+            --radius-sm: 12px;
+            --gradient-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        /* 深色模式变量 */
+        [data-theme="dark"] {
+            --primary-color: #f0f0f0;
+            --secondary-color: #a0a0a0;
+            --bg-color: #1a1a2e;
+            --card-bg: #16213e;
+            --border-color: #2d3561;
+            --shadow: 0 2px 12px rgba(0,0,0,0.3);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.4);
+            --gradient-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        body {
+            background: var(--gradient-bg);
+            background-attachment: fixed;
+            color: var(--primary-color);
+            line-height: 1.7;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            transition: background 0.5s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        /* 返回按钮 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--card-bg);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            margin-bottom: 40px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+            transform: translateX(-4px);
+        }
+
+        /* 页面标题 */
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-header i {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .page-header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .page-header .subtitle {
+            color: var(--secondary-color);
+            margin-top: 10px;
+            font-size: 1.05rem;
+        }
+
+        /* 城市大图 */
+        .city-hero-image {
+            width: 100%;
+            height: 280px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow);
+        }
+
+        .city-hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .city-hero-image:hover img {
+            transform: scale(1.03);
+        }
+
+        /* 景点图片 */
+        .spot-image {
+            width: 100%;
+            height: 180px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .spot-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .spot-image:hover img {
+            transform: scale(1.03);
+        }
+
+        /* 内容卡片 */
+        .content-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .content-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .content-card h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-card h2 i {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-card p {
+            color: var(--secondary-color);
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+
+        .content-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .content-card strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* 特色标签 */
+        .feature-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .feature-tag {
+            background: var(--bg-color);
+            padding: 10px 20px;
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .feature-tag:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        /* 深色模式切换按钮 */
+        .theme-toggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .theme-toggle i {
+            transition: transform 0.3s ease;
+        }
+
+        [data-theme="dark"] .theme-toggle i {
+            transform: rotate(180deg);
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .city-hero-image {
+                height: 200px;
+            }
+            .spot-image {
+                height: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 返回按钮 -->
+        <a href="个人主页-架构.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> 返回主页
+        </a>
+
+        <!-- 页面标题 -->
+        <header class="page-header">
+            <i class="fas fa-map-pin"></i>
+            <h1>保定</h1>
+            <p class="subtitle">北控三关，南达九省，畿辅重地，都南屏翰</p>
+        </header>
+
+        <!-- 城市大图 -->
+        <div class="city-hero-image">
+            <img src="../图片/bd.png" alt="古城风光">
+        </div>
+
+        <!-- 城市简介 -->
+        <section class="content-card">
+            <h2><i class="fas fa-info-circle"></i> 城市简介</h2>
+            <p>
+                保定，河北省地级市，素有"北控三关，南达九省，畿辅重地，都南屏翰"之称。
+                这是一座有着3000多年历史的古城，曾是直隶省会，有着深厚的历史文化底蕴。
+            </p>
+            <p>
+                保定是国家历史文化名城，中国优秀旅游城市。这里既有历史的厚重感，也有现代的活力。
+                在这里，我开启了自己的学习之旅，结识了许多志同道合的朋友。
+            </p>
+        </section>
+
+        <!-- 著名景点 -->
+        <section class="content-card">
+            <h2><i class="fas fa-landmark"></i> 著名景点</h2>
+            <div class="spot-image">
+                <img src="../图片/zd.png" alt="古建筑">
+            </div>
+            <p>
+                <strong>直隶总督署</strong> - 清代直隶总督的办公场所，是中国保存最完整的清代省级衙署，
+                有"一座总督衙署，半部清史写照"之称。
+            </p>
+            <div class="spot-image">
+                <img src="../图片/glhc.png" alt="荷花池">
+            </div>
+            <p>
+                <strong>古莲花池</strong> - 中国十大名园之一，始建于元代，因池中荷花盛开而得名。
+                园内亭台楼阁错落有致，是保定的标志性景点。
+            </p>
+            <div class="spot-image">
+                <img src="../图片/byd.png" alt="白洋淀芦苇荡">
+            </div>
+            <p>
+                <strong>白洋淀</strong> - 华北平原最大的淡水湖泊，素有"华北明珠"之称。
+                这里芦苇荡漾，荷花飘香，是休闲度假的好去处。
+            </p>
+            <div class="spot-image">
+                <img src="../图片/jx.png" alt="军校纪念馆">
+            </div>
+            <p>
+                <strong>保定军校纪念馆</strong> - 中国近代史上第一所正规陆军军校，
+                培养了大批军事人才，在中国近代史上占有重要地位。
+            </p>
+        </section>
+
+        <!-- 特色美食 -->
+        <section class="content-card">
+            <h2><i class="fas fa-utensils"></i> 特色美食</h2>
+            <p>
+                保定的美食以驴肉火烧最为著名，外酥里嫩，香气四溢，是保定人的最爱。
+                此外，白运章包子、卤煮鸡、槐茂酱菜等也是保定的特色美食。
+            </p>
+            <div class="feature-tags">
+                <span class="feature-tag">驴肉火烧</span>
+                <span class="feature-tag">白运章包子</span>
+                <span class="feature-tag">卤煮鸡</span>
+                <span class="feature-tag">槐茂酱菜</span>
+                <span class="feature-tag">骨渣丸子</span>
+            </div>
+        </section>
+
+        <!-- 我的故事 -->
+        <section class="content-card">
+            <h2><i class="fas fa-heart"></i> 我的故事</h2>
+            <p>
+                来到保定，是我人生中重要的转折点。在这里，我开始了新的学习生活，
+                认识了来自五湖四海的同学朋友。保定的慢节奏生活让我学会了沉淀，
+                古城的历史底蕴让我更加热爱中国文化。
+            </p>
+            <p>
+                周末的时候，我喜欢去古莲花池散步，看荷花盛开；喜欢去直隶总督署参观，
+                感受历史的厚重；喜欢和朋友们一起品尝地道的驴肉火烧...
+            </p>
+            <p>
+                保定，这座古老而又充满活力的城市，正在成为我的第二故乡。
+                在这里的每一天，都是充实而美好的。
+            </p>
+        </section>
+
+        <!-- 深色模式切换按钮 -->
+        <button class="theme-toggle" onclick="toggleTheme()" title="切换深色/浅色模式">
+            <i class="fas fa-moon"></i>
+        </button>
+
+    </div>
+
+    <script src="theme.js"></script>
+</body>
+</html>

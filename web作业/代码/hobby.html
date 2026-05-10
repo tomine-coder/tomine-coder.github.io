@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>兴趣爱好 - 王浩杰</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #666;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-color: #e8e8e8;
+            --shadow: 0 2px 12px rgba(0,0,0,0.06);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
+            --radius: 16px;
+            --radius-sm: 12px;
+            --gradient-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        /* 深色模式变量 */
+        [data-theme="dark"] {
+            --primary-color: #f0f0f0;
+            --secondary-color: #a0a0a0;
+            --bg-color: #1a1a2e;
+            --card-bg: #16213e;
+            --border-color: #2d3561;
+            --shadow: 0 2px 12px rgba(0,0,0,0.3);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.4);
+            --gradient-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        body {
+            background: var(--gradient-bg);
+            background-attachment: fixed;
+            color: var(--primary-color);
+            line-height: 1.7;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            transition: background 0.5s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        /* 返回按钮 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--card-bg);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            margin-bottom: 40px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+            transform: translateX(-4px);
+        }
+
+        /* 页面标题 */
+        .page-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 50px;
+            letter-spacing: -0.5px;
+        }
+
+        /* 爱好卡片 */
+        .hobby-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hobby-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .hobby-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .hobby-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .hobby-title h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .hobby-content p {
+            color: var(--secondary-color);
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+
+        /* 爱好图片 */
+        .hobby-image {
+            width: 100%;
+            height: 220px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .hobby-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .hobby-image:hover img {
+            transform: scale(1.03);
+        }
+
+        /* 子项目列表 */
+        .sub-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .sub-item {
+            background: var(--bg-color);
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .sub-item:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .sub-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .sub-item h4 i {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-right: 6px;
+        }
+
+        .sub-item p {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* 深色模式切换按钮 */
+        .theme-toggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .theme-toggle i {
+            transition: transform 0.3s ease;
+        }
+
+        [data-theme="dark"] .theme-toggle i {
+            transform: rotate(180deg);
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .sub-items {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 返回按钮 -->
+        <a href="个人主页-架构.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> 返回主页
+        </a>
+
+        <!-- 页面标题 -->
+        <h1 class="page-title">兴趣爱好</h1>
+
+        <!-- 编程开发 -->
+        <section class="hobby-card" id="coding">
+            <div class="hobby-header">
+                <div class="hobby-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <div class="hobby-title">
+                    <h2>编程开发</h2>
+                </div>
+            </div>
+            <div class="hobby-image">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=200&fit=crop" alt="编程开发">
+            </div>
+            <div class="hobby-content">
+                <p>编程是我最大的兴趣爱好，也是我的职业方向。我喜欢用代码将想法变成现实，享受解决问题的成就感。</p>
+                <p>我主要学习前端开发技术，包括 HTML、CSS、JavaScript，以及一些常用的框架和工具。通过不断学习和实践，我希望能够成为一名优秀的前端工程师。</p>
+            </div>
+            <div class="sub-items">
+                <div class="sub-item">
+                    <h4><i class="fab fa-html5"></i> HTML/CSS</h4>
+                    <p>构建网页结构和样式</p>
+                </div>
+                <div class="sub-item">
+                    <h4><i class="fab fa-js"></i> JavaScript</h4>
+                    <p>实现网页交互功能</p>
+                </div>
+                <div class="sub-item">
+                    <h4><i class="fas fa-mobile-alt"></i> 响应式设计</h4>
+                    <p>适配各种设备屏幕</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 阅读学习 -->
+        <section class="hobby-card" id="reading">
+            <div class="hobby-header">
+                <div class="hobby-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="hobby-title">
+                    <h2>阅读学习</h2>
+                </div>
+            </div>
+            <div class="hobby-image">
+                <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&h=200&fit=crop" alt="阅读学习">
+            </div>
+            <div class="hobby-content">
+                <p>阅读是我获取知识和放松身心的重要方式。我喜欢阅读技术书籍、人文社科类作品，以及一些经典的文学作品。</p>
+                <p>通过阅读，我不仅学到了专业知识，也拓宽了视野，学会了从不同的角度思考问题。阅读让我保持好奇心，不断探索未知的世界。</p>
+            </div>
+            <div class="sub-items">
+                <div class="sub-item">
+                    <h4><i class="fas fa-code"></i> 技术书籍</h4>
+                    <p>提升专业技能</p>
+                </div>
+                <div class="sub-item">
+                    <h4><i class="fas fa-history"></i> 人文历史</h4>
+                    <p>了解人类文明</p>
+                </div>
+                <div class="sub-item">
+                    <h4><i class="fas fa-feather-alt"></i> 文学小说</h4>
+                    <p>丰富精神世界</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 摄影记录 -->
+        <section class="hobby-card" id="photo">
+            <div class="hobby-header">
+                <div class="hobby-icon">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <div class="hobby-title">
+                    <h2>摄影记录</h2>
+                </div>
+            </div>
+            <div class="hobby-image">
+                <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&h=200&fit=crop" alt="摄影记录">
+            </div>
+            <div class="hobby-content">
+                <p>摄影让我学会用镜头记录生活中的美好瞬间。无论是风景、人物还是日常小事，都值得被记录下来。</p>
+                <p>我喜欢在旅行中拍摄风景照片，也喜欢记录生活中的点滴。每一张照片都是一个故事，承载着那一刻的记忆和情感。</p>
+            </div>
+            <div class="sub-items">
+                <div class="sub-item">
+                    <h4><i class="fas fa-mountain"></i> 风景摄影</h4>
+                    <p>记录自然风光</p>
+                </div>
+                <div class="sub-item">
+                    <h4><i class="fas fa-user"></i> 人像摄影</h4>
+                    <p>捕捉人物神态</p>
+                </div>
+                <div class="sub-item">
+                    <h4><i class="fas fa-city"></i> 街拍记录</h4>
+                    <p>城市生活瞬间</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 音乐欣赏 -->
+        <section class="hobby-card" id="music">
+            <div class="hobby-header">
+                <div class="hobby-icon">
+                    <i class="fas fa-headphones"></i>
+                </div>
+                <div class="hobby-title">
+                    <h2>音乐欣赏</h2>
+                </div>
+            </div>
+            <div class="hobby-image">
+                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&h=200&fit=crop" alt="音乐欣赏">
+            </div>
+            <div class="hobby-content">
+                <p>音乐是生活中不可或缺的一部分。无论是工作学习时听轻音乐，还是运动时听节奏感强的歌曲，音乐总能给我带来不同的感受。</p>
+                <p>我喜欢华语流行音乐，尤其喜欢周杰伦、薛之谦、林俊杰等歌手的作品。他们的歌曲陪伴我度过了许多难忘的时光。</p>
+            </div>
+            <div class="sub-items">
+                <div class="sub-item">
+                    <h4><i class="fas fa-guitar"></i> 流行音乐</h4>
+                    <p>华语流行歌曲</p>
+                </div>
+                <div class="sub-item">
+                    <h4><i class="fas fa-piano"></i> 轻音乐</h4>
+                    <p>放松身心</p>
+                </div>
+                <div class="sub-item">
+                    <h4><i class="fas fa-drum"></i> 电子音乐</h4>
+                    <p>运动健身必备</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 运动健身 -->
+        <section class="hobby-card" id="sport">
+            <div class="hobby-header">
+                <div class="hobby-icon">
+                    <i class="fas fa-running"></i>
+                </div>
+                <div class="hobby-title">
+                    <h2>运动健身</h2>
+                </div>
+            </div>
+            <div class="hobby-image">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=200&fit=crop" alt="运动健身">
+            </div>
+            <div class="hobby-content">
+                <p>运动是保持健康的重要方式。我坚持每周进行适量的运动，包括跑步、打篮球和健身等。</p>
+                <p>运动不仅让我保持身体健康，也让我释放压力、保持积极的心态。每次运动后那种畅快淋漓的感觉，让我更加热爱生活。</p>
+            </div>
+            <div class="sub-items">
+                <div class="sub-item">
+                    <h4><i class="fas fa-running"></i> 跑步</h4>
+                    <p>有氧运动首选</p>
+                </div>
+                <div class="sub-item">
+                    <h4><i class="fas fa-basketball-ball"></i> 足球</h4>
+                    <p>团队运动乐趣</p>
+                </div>
+                <div class="sub-item">
+                    <h4><i class="fas fa-dumbbell"></i> 健身</h4>
+                    <p>力量训练</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 深色模式切换按钮 -->
+        <button class="theme-toggle" onclick="toggleTheme()" title="切换深色/浅色模式">
+            <i class="fas fa-moon"></i>
+        </button>
+
+    </div>
+
+    <script src="theme.js"></script>
+</body>
+</html>

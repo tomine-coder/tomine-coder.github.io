@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../web/前端"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "web作业"
+	}
+}

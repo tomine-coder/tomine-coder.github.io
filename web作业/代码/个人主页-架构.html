@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王浩杰 - 个人主页</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ========== 全局样式 - 现代简约风 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #666;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-color: #e8e8e8;
+            --accent-color: #007aff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.06);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
+            --radius: 16px;
+            --radius-sm: 12px;
+            --gradient-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        /* 深色模式变量 */
+        [data-theme="dark"] {
+            --primary-color: #f0f0f0;
+            --secondary-color: #a0a0a0;
+            --bg-color: #1a1a2e;
+            --card-bg: #16213e;
+            --border-color: #2d3561;
+            --shadow: 0 2px 12px rgba(0,0,0,0.3);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.4);
+            --gradient-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        body {
+            background: var(--gradient-bg);
+            background-attachment: fixed;
+            color: var(--primary-color);
+            line-height: 1.7;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            transition: background 0.5s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        /* ========== 页面标题 ========== */
+        .header-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header-avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 24px;
+            border: 3px solid var(--card-bg);
+            box-shadow: var(--shadow-hover);
+            transition: transform 0.3s ease;
+        }
+
+        .header-avatar:hover {
+            transform: scale(1.02);
+        }
+
+        .header-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .page-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        /* ========== 深色模式切换按钮 ========== */
+        .theme-toggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .theme-toggle i {
+            transition: transform 0.3s ease;
+        }
+
+        [data-theme="dark"] .theme-toggle i {
+            transform: rotate(180deg);
+        }
+
+        /* ========== 模块卡片基础样式 ========== */
+        .module {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .module:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .module-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .module-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* ========== 模块1：我的足迹 ========== */
+        .module-clickable {
+            cursor: pointer;
+        }
+
+        .module-clickable:hover {
+            border-color: #d0d0d0;
+        }
+
+        .footprint-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .city-card {
+            background: var(--bg-color);
+            padding: 24px;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .city-card:hover {
+            border-color: #667eea;
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .city-card i {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+
+        .city-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .city-card p {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .click-hint {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--secondary-color);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* ========== 模块2：音乐偏好 ========== */
+        .music-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .singer-tag {
+            background: var(--bg-color);
+            padding: 12px 24px;
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+        }
+
+        .singer-tag:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        /* ========== 模块3：兴趣爱好 ========== */
+        .hobby-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 16px;
+        }
+
+        .hobby-item {
+            background: var(--bg-color);
+            padding: 24px;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .hobby-item:hover {
+            border-color: #667eea;
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .hobby-item:hover i {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hobby-item i {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .hobby-item span {
+            display: block;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* ========== 模块4：关于我 ========== */
+        .about-content p {
+            color: var(--secondary-color);
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+
+        .about-content p:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- 页面头部 -->
+        <div class="header-section">
+            <div class="header-avatar">
+                <img src="../图片/image.png" alt="个人头像">
+            </div>
+            <h1 class="page-title">欢迎来到我的个人主页</h1>
+        </div>
+
+        <!-- 模块1：我的足迹 - 点击跳转到足迹页面 -->
+        <section class="module module-clickable" onclick="window.location.href='footprint.html'">
+            <div class="module-header">
+                <div class="module-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h2 class="module-title">我的足迹</h2>
+            </div>
+            <div class="footprint-content">
+                <div class="city-card" onclick="event.stopPropagation(); window.location.href='tianjin.html'">
+                    <i class="fas fa-home"></i>
+                    <h4>家乡 · 天津</h4>
+                    <p>九河下梢天津卫</p>
+                </div>
+                <div class="city-card" onclick="event.stopPropagation(); window.location.href='baoding.html'">
+                    <i class="fas fa-map-pin"></i>
+                    <h4>现居 · 保定</h4>
+                    <p>畿辅重地</p>
+                </div>
+            </div>
+            <p class="click-hint"><i class="fas fa-hand-pointer"></i> 点击城市了解详情</p>
+        </section>
+
+        <!-- 模块2：音乐偏好 - 点击跳转到音乐页面 -->
+        <section class="module module-clickable" onclick="window.location.href='music.html'">
+            <div class="module-header">
+                <div class="module-icon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h2 class="module-title">音乐偏好</h2>
+            </div>
+            <div class="music-content">
+                <span class="singer-tag" onclick="event.stopPropagation()">周杰伦</span>
+                <span class="singer-tag" onclick="event.stopPropagation()">薛之谦</span>
+                <span class="singer-tag" onclick="event.stopPropagation()">林俊杰</span>
+                <span class="singer-tag" onclick="event.stopPropagation()">陈奕迅</span>
+                <span class="singer-tag" onclick="event.stopPropagation()">李荣浩</span>
+            </div>
+            <p class="click-hint"><i class="fas fa-hand-pointer"></i> 点击查看歌手详情</p>
+        </section>
+
+        <!-- 模块3：兴趣爱好 - 点击跳转到爱好详情页 -->
+        <section class="module module-clickable" onclick="window.location.href='hobby.html'">
+            <div class="module-header">
+                <div class="module-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h2 class="module-title">兴趣爱好</h2>
+            </div>
+            <div class="hobby-content">
+                <a href="hobby.html?type=coding" class="hobby-item" onclick="event.stopPropagation()">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>编程开发</span>
+                </a>
+                <a href="hobby.html?type=reading" class="hobby-item" onclick="event.stopPropagation()">
+                    <i class="fas fa-book"></i>
+                    <span>阅读学习</span>
+                </a>
+                <a href="hobby.html?type=photo" class="hobby-item" onclick="event.stopPropagation()">
+                    <i class="fas fa-camera"></i>
+                    <span>摄影记录</span>
+                </a>
+                <a href="hobby.html?type=music" class="hobby-item" onclick="event.stopPropagation()">
+                    <i class="fas fa-headphones"></i>
+                    <span>音乐欣赏</span>
+                </a>
+                <a href="hobby.html?type=sport" class="hobby-item" onclick="event.stopPropagation()">
+                    <i class="fas fa-running"></i>
+                    <span>运动健身</span>
+                </a>
+            </div>
+            <p class="click-hint"><i class="fas fa-hand-pointer"></i> 点击查看爱好详情</p>
+        </section>
+
+        <!-- 模块4：关于我 - 点击跳转到关于我详情页 -->
+        <section class="module module-clickable" onclick="window.location.href='about.html'">
+            <div class="module-header">
+                <div class="module-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h2 class="module-title">关于我</h2>
+            </div>
+            <div class="about-content">
+                <p>
+                    我喜欢用代码创造价值，享受将创意转化为实际作品的过程。
+                    在编程之外，我也热爱音乐、阅读和摄影，让生活更加丰富多彩。
+                </p>
+            </div>
+            <p class="click-hint"><i class="fas fa-hand-pointer"></i> 点击查看详细信息</p>
+        </section>
+ 
+        <!-- 深色模式切换按钮 -->
+        <button class="theme-toggle" onclick="toggleTheme()" title="切换深色/浅色模式">
+            <i class="fas fa-moon"></i>
+        </button>
+
+    </div>
+
+    <script src="theme.js"></script>
+</body>
+</html>
